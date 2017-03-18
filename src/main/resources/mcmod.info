@@ -1,0 +1,16 @@
+[
+{
+  "modid": "iskalliumreactors",
+  "name": "Iskallium Reactors",
+  "description": "Generate RF with Iskallium.",
+  "version": "0.3.6-beta",
+  "mcversion": "1.10.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Iskall85","Winter_Grave"],
+  "credits": "Iskall85",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

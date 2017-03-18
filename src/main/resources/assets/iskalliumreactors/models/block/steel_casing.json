@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+    "textures": {
+        "all": "iskalliumreactors:blocks/steel_casing"
+    }
+}
