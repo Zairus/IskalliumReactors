@@ -10,6 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.energy.IEnergyStorage;
 import zairus.iskalliumreactors.IRConfig;
+import zairus.iskalliumreactors.block.IRBlocks;
 
 public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEnergyStorage, IEnergyProvider //, IEnergyConnection, IEnergyHandler, cofh.api.energy.IEnergyStorage
 {
@@ -34,6 +35,14 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 	public void update()
 	{
 		this.capacity = (controller != null && controller.getIsReactor())? controller.getGeneratorBlockCount() * IRConfig.eachIskalliumBlockPowerValue : 0;
+		
+		if (controller != null &&controller.getPos() != null)
+		{
+			if (this.worldObj.getBlockState(controller.getPos()).getBlock() != IRBlocks.STEEL_CONTROLLER)
+			{
+				this.capacity = 0;
+			}
+		}
 		
 		for (EnumFacing facing : EnumFacing.HORIZONTALS)
 		{
