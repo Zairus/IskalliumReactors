@@ -26,6 +26,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 	private int yEnd = 0;
 	private int zEnd = 0;
 	private int generatorBlockCount = 0;
+	private int controlTicks = 0;
 	
 	public TileEntityIRController()
 	{
@@ -55,12 +56,14 @@ public class TileEntityIRController extends TileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		if (!this.worldObj.isRemote)
+		++controlTicks;
+		
+		if (controlTicks >= 1000000)
+			controlTicks = 0;
+		
+		if (!this.worldObj.isRemote && controlTicks % 20 == 0)
 		{
 			reactorBuilt = checkStructure();
-			
-			if (reactorBuilt)
-				turnGlass();
 		}
 	}
 	
@@ -78,6 +81,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		return tag;
 	}
 	
+	@SuppressWarnings("unused")
 	private void turnGlass()
 	{
 		BlockPos start = new BlockPos(xStart, yStart, zStart);
@@ -233,6 +237,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		
 		generatorBlockCount = 0;
 		
+		box_check:
 		for (int x = xStart; x <= xEnd; ++x)
 		{
 			for (int z = zStart; z <= zEnd; ++z)
@@ -267,6 +272,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 						if (!casingBlocks.contains(b))
 						{
 							isReactor = false;
+							break box_check;
 						}
 					}
 					else if (x == xStart || x == xEnd || z == zStart || z == zEnd)
@@ -274,6 +280,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 						if (!structureBlocks.contains(b))
 						{
 							isReactor = false;
+							break box_check;
 						}
 					}
 					else
@@ -281,6 +288,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 						if (!generatorBlocks.contains(b))
 						{
 							isReactor = false;
+							break box_check;
 						}
 						
 						if (b == IRBlocks.ISKALLIUM_ORE)

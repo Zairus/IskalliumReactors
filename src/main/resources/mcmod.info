@@ -3,7 +3,7 @@
   "modid": "iskalliumreactors",
   "name": "Iskallium Reactors",
   "description": "Generate RF with Iskallium.",
-  "version": "0.3.6-beta",
+  "version": "0.3.7-beta",
   "mcversion": "1.10.2",
   "url": "",
   "updateUrl": "",
