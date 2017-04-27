@@ -76,7 +76,7 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 	@Override
 	public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, net.minecraft.util.EnumFacing facing)
 	{
-		if (capability.getName() == "net.minecraftforge.energy.IEnergyStorage")
+		if (capability != null && capability.getName() == "net.minecraftforge.energy.IEnergyStorage")
 		{
 			return true;
 		}
