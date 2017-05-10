@@ -3,7 +3,6 @@ package zairus.iskalliumreactors.tileentity;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import cofh.api.energy.IEnergyProvider;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -12,10 +11,10 @@ import net.minecraftforge.energy.IEnergyStorage;
 import zairus.iskalliumreactors.IRConfig;
 import zairus.iskalliumreactors.block.IRBlocks;
 
-public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEnergyStorage, IEnergyProvider //, IEnergyConnection, IEnergyHandler, cofh.api.energy.IEnergyStorage
+public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEnergyStorage
 {
 	public int energy = 0;
-	public int capacity = 0;
+	public int capacity = 1000000;
     public int maxReceive = 0;
     public int maxExtract = 1000;
 	
@@ -34,17 +33,20 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 	@Override
 	public void update()
 	{
-		this.capacity = (controller != null && controller.getIsReactor())? controller.getGeneratorBlockCount() * IRConfig.eachIskalliumBlockPowerValue : 0;
+		int reactorYield = (controller != null && controller.getIsReactor())? controller.getGeneratorBlockCount() * IRConfig.eachIskalliumBlockPowerValue : 0;
 		
-		if (controller != null &&controller.getPos() != null)
+		if (this.energy < this.capacity)
+			this.energy += reactorYield;
+		
+		if (controller != null && controller.getPos() != null)
 		{
 			if (this.worldObj.getBlockState(controller.getPos()).getBlock() != IRBlocks.STEEL_CONTROLLER)
 			{
-				this.capacity = 0;
+				this.energy = 0;
 			}
 		}
 		
-		for (EnumFacing facing : EnumFacing.HORIZONTALS)
+		for (EnumFacing facing : EnumFacing.VALUES)
 		{
 			TileEntity te = this.worldObj.getTileEntity(this.getPos().offset(facing));
 			if (te != null && !(te instanceof TileEntityIRController))
@@ -55,7 +57,12 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 					if (m != null)
 					{
 						try {
-							m.invoke(te, facing.getOpposite(), this.capacity, false);
+							Object o = m.invoke(te, facing.getOpposite(), this.extractEnergy(reactorYield, false), false);
+							if (o instanceof Integer)
+							{
+								reactorYield -= (int)o;
+								this.energy += reactorYield;
+							}
 						} catch (IllegalAccessException e) {
 							e.printStackTrace();
 						} catch (IllegalArgumentException e) {
@@ -84,9 +91,24 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 		return super.hasCapability(capability, facing);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
+	{
+		if (capability != null && capability.getName() == "net.minecraftforge.energy.IEnergyStorage")
+		{
+			return (T) this;
+		}
+		
+		return super.getCapability(capability, facing);
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
+		if (compound.hasKey("IR_EnergyStored"))
+			this.energy = compound.getInteger("IR_EnergyStored");
+		
 		super.readFromNBT(compound);
 	}
 	
@@ -95,43 +117,28 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 	{
 		NBTTagCompound tag = super.writeToNBT(compound);
 		
+		tag.setInteger("IR_EnergyStored", this.energy);
+		
 		return tag;
-	}
-	
-	@Override
-	public int getEnergyStored(EnumFacing facing)
-	{
-		return this.capacity;
-	}
-	
-	@Override
-	public int getMaxEnergyStored(EnumFacing facing)
-	{
-		return this.capacity;
-	}
-	
-	@Override
-	public boolean canConnectEnergy(EnumFacing facing)
-	{
-		return true;
-	}
-	
-	@Override
-	public int extractEnergy(EnumFacing facing, int maxExtract, boolean simulate)
-	{
-		return this.extractEnergy(maxExtract, simulate);
 	}
 	
 	@Override
 	public int extractEnergy(int extract, boolean simulate)
 	{
-		return (this.capacity > 1000)? 1000 : this.capacity;
+		int amount = (extract <= this.energy)?  extract : this.energy;
+		
+		this.energy -= amount;
+		
+		if (this.energy < 0)
+			this.energy = 0;
+		
+		return amount;
 	}
 	
 	@Override
 	public int getEnergyStored()
 	{
-		return this.capacity;
+		return this.energy;
 	}
 	
 	@Override
