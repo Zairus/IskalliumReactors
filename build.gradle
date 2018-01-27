@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-version = "0.3.9-beta"
+version = "0.3.12"
 group = "zairus.iskalliumreactors"
 archivesBaseName = "iskalliumreactors-1.10.2"
 
@@ -18,7 +18,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 minecraft {
-    version = "1.10.2-12.18.3.2234"
+    version = "1.10.2-12.18.3.2297"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.

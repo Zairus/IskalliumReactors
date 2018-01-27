@@ -16,7 +16,7 @@ public class WorldGenIskalliumOre implements IWorldGenerator
 	private final WorldGenIRMineable worldGenIRMineable;
 
 	public WorldGenIskalliumOre() {
-		worldGenIRMineable = new WorldGenIRMineable(IRBlocks.ISKALLIUM_STONE_ORE.getDefaultState());
+		worldGenIRMineable = new WorldGenIRMineable(IRBlocks.ISKALLIUM_ORE.getDefaultState());
 	}
 
 	@Override

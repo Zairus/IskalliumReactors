@@ -39,7 +39,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		casingBlocks.add(IRBlocks.STEEL_CONTROLLER);
 		casingBlocks.add(IRBlocks.STEEL_POWERTAP);
 		
-		generatorBlocks.add(IRBlocks.ISKALLIUM_ORE);
+		generatorBlocks.add(IRBlocks.ISKALLIUM);
 		generatorBlocks.add(Blocks.AIR);
 	}
 	
@@ -291,7 +291,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 							break box_check;
 						}
 						
-						if (b == IRBlocks.ISKALLIUM_ORE)
+						if (b == IRBlocks.ISKALLIUM)
 							++generatorBlockCount;
 					}
 				}

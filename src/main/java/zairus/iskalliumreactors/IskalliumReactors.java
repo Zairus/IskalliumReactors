@@ -31,7 +31,7 @@ public class IskalliumReactors
 		@Override
 		public Item getTabIconItem()
 		{
-			return Item.getItemFromBlock(IRBlocks.ISKALLIUM_ORE);
+			return Item.getItemFromBlock(IRBlocks.ISKALLIUM);
 		}
 	};
 	

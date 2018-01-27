@@ -62,7 +62,7 @@ public class IRCraftingHandler
 				});
 		
 		GameRegistry.addShapelessRecipe(
-				new ItemStack(IRBlocks.ISKALLIUM_ORE, 1, 0)
+				new ItemStack(IRBlocks.ISKALLIUM, 1, 0)
 				, new Object[] {
 						new ItemStack(IRItems.ISKALLIUM_ESSENCE)
 						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
@@ -78,7 +78,7 @@ public class IRCraftingHandler
 		GameRegistry.addShapelessRecipe(
 				new ItemStack(IRItems.ISKALLIUM_ESSENCE, 9, 0)
 				, new Object[] {
-						new ItemStack(IRBlocks.ISKALLIUM_ORE)
+						new ItemStack(IRBlocks.ISKALLIUM)
 				});
 		
 		GameRegistry.addShapelessRecipe(

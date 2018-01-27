@@ -15,8 +15,8 @@ import zairus.iskalliumreactors.tileentity.TileEntityIRPowerTap;
 
 public class IRBlocks
 {
+	public static final Block ISKALLIUM;
 	public static final Block ISKALLIUM_ORE;
-	public static final Block ISKALLIUM_STONE_ORE;
 	public static final Block ISKALLIUM_GLASS;
 	public static final Block STEEL_CASING;
 	public static final Block STEEL_CONTROLLER;
@@ -24,8 +24,8 @@ public class IRBlocks
 	
 	static
 	{
-		ISKALLIUM_ORE = new BlockIskallium().setRegistryName("iskallium_ore").setUnlocalizedName("iskallium_ore");
-		ISKALLIUM_STONE_ORE = new BlockIskalliumStoneOre().setRegistryName("iskallium_stone_ore").setUnlocalizedName("iskallium_stone_ore");
+		ISKALLIUM = new BlockIskallium().setRegistryName("iskallium_ore").setUnlocalizedName("iskallium_ore");
+		ISKALLIUM_ORE = new BlockIskalliumStoneOre().setRegistryName("iskallium_stone_ore").setUnlocalizedName("iskallium_stone_ore");
 		ISKALLIUM_GLASS = new BlockIskalliumGlass().setRegistryName("iskallium_glass").setUnlocalizedName("iskallium_glass");
 		STEEL_CASING = new BlockSteelCasing().setRegistryName("steel_casing").setUnlocalizedName("steel_casing");
 		STEEL_CONTROLLER = new BlockIRController().setRegistryName("steel_controller").setUnlocalizedName("steel_controller");
@@ -34,8 +34,8 @@ public class IRBlocks
 	
 	public static void register()
 	{
-		registerBlock(ISKALLIUM_ORE, "iskallium_ore");
-		registerBlock(ISKALLIUM_STONE_ORE, "iskallium_stone_ore");
+		registerBlock(ISKALLIUM, "iskallium_ore");
+		registerBlock(ISKALLIUM_ORE, "iskallium_stone_ore");
 		registerBlock(ISKALLIUM_GLASS, "iskallium_glass");
 		registerBlock(STEEL_CASING, "steel_casing");
 		

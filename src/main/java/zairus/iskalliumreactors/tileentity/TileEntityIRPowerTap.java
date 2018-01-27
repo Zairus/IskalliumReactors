@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.IEnergyStorage;
 import zairus.iskalliumreactors.IRConfig;
 import zairus.iskalliumreactors.block.IRBlocks;
@@ -18,6 +19,8 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
     public int maxReceive = 0;
     public int maxExtract = 1000;
 	
+    public static final Capability<IEnergyStorage> ENERGY_HANDLER = null;
+    
     private TileEntityIRController controller;
     
 	public TileEntityIRPowerTap()
@@ -33,6 +36,9 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 	@Override
 	public void update()
 	{
+		if (this.worldObj.isRemote)
+			return;
+		
 		int reactorYield = (controller != null && controller.getIsReactor())? controller.getGeneratorBlockCount() * IRConfig.eachIskalliumBlockPowerValue : 0;
 		
 		if (this.energy < this.capacity)
@@ -49,7 +55,23 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 		for (EnumFacing facing : EnumFacing.VALUES)
 		{
 			TileEntity te = this.worldObj.getTileEntity(this.getPos().offset(facing));
+			boolean flag = false;
+			
 			if (te != null && !(te instanceof TileEntityIRController))
+			{
+				if (te.hasCapability(ENERGY_HANDLER, facing.getOpposite()))
+				{
+					IEnergyStorage store = te.getCapability(ENERGY_HANDLER, facing.getOpposite());
+					int Energy = this.extractEnergy(reactorYield, false);
+					int EnergyReceived = store.receiveEnergy(Energy, false);
+					reactorYield -= EnergyReceived;
+					this.energy += reactorYield;
+					flag = true;
+				}
+			}
+			//TileCapBank
+			
+			if (te != null && !(te instanceof TileEntityIRController) && !flag)
 			{
 				try {
 					Method m = te.getClass().getMethod("receiveEnergy", new Class[] { EnumFacing.class, int.class, boolean.class });
@@ -64,19 +86,15 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 								this.energy += reactorYield;
 							}
 						} catch (IllegalAccessException e) {
-							e.printStackTrace();
 						} catch (IllegalArgumentException e) {
-							e.printStackTrace();
 						} catch (InvocationTargetException e) {
-							e.printStackTrace();
 						}
 					}
 				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
 				} catch (SecurityException e) {
-					e.printStackTrace();
 				}
 			}
+			
 		}
 	}
 	
