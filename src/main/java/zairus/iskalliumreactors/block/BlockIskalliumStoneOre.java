@@ -10,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import zairus.iskalliumreactors.IskalliumReactors;
 import zairus.iskalliumreactors.item.IRItems;
@@ -70,7 +69,7 @@ public class BlockIskalliumStoneOre extends BlockOre
 		
 		if (this.getItemDropped(state, rand, fortune) != Item.getItemFromBlock(this))
 		{
-			int i = MathHelper.getRandomIntegerInRange(rand, 3, 7);
+			int i = 3 + rand.nextInt(5);
 			
 			return i;
 		}

@@ -61,7 +61,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		if (controlTicks >= 1000000)
 			controlTicks = 0;
 		
-		if (!this.worldObj.isRemote && controlTicks % 20 == 0)
+		if (!this.world.isRemote && controlTicks % 20 == 0)
 		{
 			reactorBuilt = checkStructure();
 		}
@@ -94,11 +94,11 @@ public class TileEntityIRController extends TileEntity implements ITickable
 				for (int y = start.getY(); y >= end.getY(); --y)
 				{
 					BlockPos curPos = new BlockPos(x, y, z);
-					Block b = this.worldObj.getBlockState(curPos).getBlock();
+					Block b = this.world.getBlockState(curPos).getBlock();
 					
 					if (b == IRBlocks.STEEL_POWERTAP)
 					{
-						TileEntity te = this.worldObj.getTileEntity(curPos);
+						TileEntity te = this.world.getTileEntity(curPos);
 						if (te instanceof TileEntityIRPowerTap)
 						{
 							((TileEntityIRPowerTap)te).setController(this);
@@ -107,7 +107,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 					
 					if (b == Blocks.GLASS || b == Blocks.STAINED_GLASS)
 					{
-						this.worldObj.setBlockState(curPos, IRBlocks.ISKALLIUM_GLASS.getDefaultState());
+						this.world.setBlockState(curPos, IRBlocks.ISKALLIUM_GLASS.getDefaultState());
 					}
 				}
 			}
@@ -129,7 +129,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		while(checking)
 		{
 			pos = pos.up();
-			b = this.worldObj.getBlockState(pos).getBlock();
+			b = this.world.getBlockState(pos).getBlock();
 			if (this.structureBlocks.contains(b))
 				yStart = pos.getY();
 			else
@@ -142,7 +142,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		while(checking)
 		{
 			pos = pos.down();
-			b = this.worldObj.getBlockState(pos).getBlock();
+			b = this.world.getBlockState(pos).getBlock();
 			if (this.structureBlocks.contains(b))
 				yEnd = pos.getY();
 			else
@@ -155,7 +155,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		
 		for (EnumFacing facing : EnumFacing.HORIZONTALS)
 		{
-			b = this.worldObj.getBlockState(pos.offset(facing)).getBlock();
+			b = this.world.getBlockState(pos.offset(facing)).getBlock();
 			if (!structureBlocks.contains(b))
 				f = facing;
 		}
@@ -179,7 +179,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		while (checking)
 		{
 			pos = pos.offset(f);
-			b = this.worldObj.getBlockState(pos).getBlock();
+			b = this.world.getBlockState(pos).getBlock();
 			if (this.structureBlocks.contains(b))
 			{
 				x2 = pos.getX();
@@ -198,7 +198,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		while (checking)
 		{
 			pos = pos.offset(f);
-			b = this.worldObj.getBlockState(pos).getBlock();
+			b = this.world.getBlockState(pos).getBlock();
 			if (this.structureBlocks.contains(b))
 			{
 				x3 = pos.getX();
@@ -217,7 +217,7 @@ public class TileEntityIRController extends TileEntity implements ITickable
 		while (checking)
 		{
 			pos = pos.offset(f);
-			b = this.worldObj.getBlockState(pos).getBlock();
+			b = this.world.getBlockState(pos).getBlock();
 			if (this.structureBlocks.contains(b))
 			{
 				x4 = pos.getX();
@@ -245,14 +245,14 @@ public class TileEntityIRController extends TileEntity implements ITickable
 				for (int y = yStart; y >= yEnd; --y)
 				{
 					pos = new BlockPos(x, y, z);
-					b = this.worldObj.getBlockState(pos).getBlock();
+					b = this.world.getBlockState(pos).getBlock();
 					
 					if (b == IRBlocks.STEEL_CONTROLLER)
 						hasController = true;
 					
 					if (b == IRBlocks.STEEL_POWERTAP)
 					{
-						TileEntity te = this.worldObj.getTileEntity(pos);
+						TileEntity te = this.world.getTileEntity(pos);
 						
 						if (te instanceof TileEntityIRPowerTap)
 							((TileEntityIRPowerTap)te).setController(this);

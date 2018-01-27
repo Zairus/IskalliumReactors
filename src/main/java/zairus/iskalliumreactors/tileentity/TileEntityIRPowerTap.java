@@ -36,7 +36,7 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 	@Override
 	public void update()
 	{
-		if (this.worldObj.isRemote)
+		if (this.world.isRemote)
 			return;
 		
 		int reactorYield = (controller != null && controller.getIsReactor())? controller.getGeneratorBlockCount() * IRConfig.eachIskalliumBlockPowerValue : 0;
@@ -46,7 +46,7 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 		
 		if (controller != null && controller.getPos() != null)
 		{
-			if (this.worldObj.getBlockState(controller.getPos()).getBlock() != IRBlocks.STEEL_CONTROLLER)
+			if (this.world.getBlockState(controller.getPos()).getBlock() != IRBlocks.STEEL_CONTROLLER)
 			{
 				this.energy = 0;
 			}
@@ -54,7 +54,7 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 		
 		for (EnumFacing facing : EnumFacing.VALUES)
 		{
-			TileEntity te = this.worldObj.getTileEntity(this.getPos().offset(facing));
+			TileEntity te = this.world.getTileEntity(this.getPos().offset(facing));
 			boolean flag = false;
 			
 			if (te != null && !(te instanceof TileEntityIRController))

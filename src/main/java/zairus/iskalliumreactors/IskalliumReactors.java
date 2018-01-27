@@ -3,7 +3,7 @@ package zairus.iskalliumreactors;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,9 +29,9 @@ public class IskalliumReactors
 	
 	public static CreativeTabs creativeTab = new CreativeTabs("iskalliumReactors") {
 		@Override
-		public Item getTabIconItem()
+		public ItemStack getTabIconItem()
 		{
-			return Item.getItemFromBlock(IRBlocks.ISKALLIUM);
+			return new ItemStack(IRBlocks.ISKALLIUM);
 		}
 	};
 	
