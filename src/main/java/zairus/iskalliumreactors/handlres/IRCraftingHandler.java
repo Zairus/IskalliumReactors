@@ -2,8 +2,12 @@ package zairus.iskalliumreactors.handlres;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import zairus.iskalliumreactors.IRConstants;
 import zairus.iskalliumreactors.block.IRBlocks;
 import zairus.iskalliumreactors.item.IRItems;
 
@@ -12,7 +16,9 @@ public class IRCraftingHandler
 	public static void addRecipes()
 	{
 		GameRegistry.addShapedRecipe(
-				new ItemStack(IRBlocks.ISKALLIUM_GLASS, 9, 0)
+				new ResourceLocation(IRConstants.MOD_ID, "iskallium_glass")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRBlocks.ISKALLIUM_GLASS, 9, 0)
 				, new Object[] {
 						"ggg"
 						,"gig"
@@ -24,7 +30,9 @@ public class IRCraftingHandler
 				});
 		
 		GameRegistry.addShapedRecipe(
-				new ItemStack(IRBlocks.ISKALLIUM_GLASS, 9, 0)
+				new ResourceLocation(IRConstants.MOD_ID, "iskallium_glass")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRBlocks.ISKALLIUM_GLASS, 9, 0)
 				, new Object[] {
 						"ggg"
 						,"gig"
@@ -36,7 +44,9 @@ public class IRCraftingHandler
 				});
 		
 		GameRegistry.addShapedRecipe(
-				new ItemStack(IRItems.STEEL_INGOT, 9, 0)
+				new ResourceLocation(IRConstants.MOD_ID, "steel_ingot")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRItems.STEEL_INGOT, 9, 0)
 				, new Object[] {
 						"ggg"
 						,"gig"
@@ -47,52 +57,58 @@ public class IRCraftingHandler
 						,Blocks.COAL_BLOCK
 				});
 		
-		GameRegistry.addShapelessRecipe(
-				new ItemStack(IRBlocks.STEEL_CASING, 1, 0)
-				, new Object[] {
-						new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-						,new ItemStack(IRItems.STEEL_INGOT)
-				});
+		Ingredient ingredient_steel_ingot = Ingredient.fromItem(IRItems.STEEL_INGOT);
+		Ingredient ingredient_iskallium_essence = Ingredient.fromItem(IRItems.ISKALLIUM_ESSENCE);
+		Ingredient ingredient_iskallium = Ingredient.fromItem(Item.getItemFromBlock(IRBlocks.ISKALLIUM));
+		Ingredient ingredient_steel_casing = Ingredient.fromItem(Item.getItemFromBlock(IRBlocks.STEEL_CASING));
+		Ingredient ingredient_redstone = Ingredient.fromItem(Items.REDSTONE);
 		
 		GameRegistry.addShapelessRecipe(
-				new ItemStack(IRBlocks.ISKALLIUM, 1, 0)
-				, new Object[] {
-						new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-						,new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-				});
+				new ResourceLocation(IRConstants.MOD_ID, "steel_casing")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRBlocks.STEEL_CASING, 1, 0)
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot
+				, ingredient_steel_ingot);
 		
 		GameRegistry.addShapelessRecipe(
-				new ItemStack(IRItems.ISKALLIUM_ESSENCE, 9, 0)
-				, new Object[] {
-						new ItemStack(IRBlocks.ISKALLIUM)
-				});
+				new ResourceLocation(IRConstants.MOD_ID, "iskallium")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRBlocks.ISKALLIUM, 1, 0)
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence
+				, ingredient_iskallium_essence);
 		
 		GameRegistry.addShapelessRecipe(
-				new ItemStack(IRBlocks.STEEL_CONTROLLER)
-				, new Object[] {
-						new ItemStack(IRBlocks.STEEL_CASING)
-						, new ItemStack(IRItems.ISKALLIUM_ESSENCE)
-				});
+				new ResourceLocation(IRConstants.MOD_ID, "iskallium_essence")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRItems.ISKALLIUM_ESSENCE, 9, 0)
+				, ingredient_iskallium);
 		
 		GameRegistry.addShapelessRecipe(
-				new ItemStack(IRBlocks.STEEL_POWERTAP)
-				, new Object[] {
-						new ItemStack(IRBlocks.STEEL_CASING)
-						, new ItemStack(Items.REDSTONE)
-				});
+				new ResourceLocation(IRConstants.MOD_ID, "steel_controller")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRBlocks.STEEL_CONTROLLER)
+				, ingredient_steel_casing
+				, ingredient_iskallium_essence);
+		
+		GameRegistry.addShapelessRecipe(
+				new ResourceLocation(IRConstants.MOD_ID, "steel_powertap")
+				, new ResourceLocation(IRConstants.MOD_ID, "iskallium_reactors")
+				, new ItemStack(IRBlocks.STEEL_POWERTAP)
+				, ingredient_steel_casing
+				, ingredient_redstone);
 	}
 }

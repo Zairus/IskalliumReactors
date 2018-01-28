@@ -12,14 +12,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import zairus.iskalliumreactors.block.IRBlocks;
 import zairus.iskalliumreactors.handlres.IRCraftingHandler;
-import zairus.iskalliumreactors.item.IRItems;
 import zairus.iskalliumreactors.proxy.CommonProxy;
 import zairus.iskalliumreactors.world.gen.feature.WorldGenIskalliumOre;
 
-@Mod(modid = IRConstants.MODID, name = IRConstants.MODNAME, version = IRConstants.VERSION)
+@Mod(modid = IRConstants.MOD_ID, name = IRConstants.MOD_NAME, version = IRConstants.MOD_VERSION)
 public class IskalliumReactors
 {
-	@Mod.Instance(IRConstants.MODID)
+	@Mod.Instance(IRConstants.MOD_ID)
 	public static IskalliumReactors instance;
 	
 	@SidedProxy(clientSide = IRConstants.CLIENT_PROXY, serverSide = IRConstants.COMMON_PROXY)
@@ -48,10 +47,6 @@ public class IskalliumReactors
     public void init(FMLInitializationEvent event)
     {
 		IskalliumReactors.proxy.init(event);
-		
-		IRItems.register();
-		IRBlocks.register();
-		
 		IskalliumReactors.proxy.initBuiltinShapes();
 		
 		GameRegistry.registerWorldGenerator(new WorldGenIskalliumOre(), IRConfig.iskalliumGenerationWeight);
