@@ -6,10 +6,11 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import zairus.iskalliumreactors.IskalliumReactors;
 import zairus.iskalliumreactors.tileentity.TileEntityIRController;
 
-public class BlockIRController extends Block implements ITileEntityProvider
+public class BlockIRController extends Block implements ITileEntityProvider, IBlockTileEntity
 {
 	public BlockIRController()
 	{
@@ -24,5 +25,11 @@ public class BlockIRController extends Block implements ITileEntityProvider
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileEntityIRController();
+	}
+	
+	@Override
+	public void registerTileEntity()
+	{
+		GameRegistry.registerTileEntity(TileEntityIRController.class, "tileEntityIRController");
 	}
 }

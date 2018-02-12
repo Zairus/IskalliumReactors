@@ -121,6 +121,12 @@ public class IRBlocks
 				final Block block = item.getBlock();
 				final ResourceLocation registryName = Preconditions.checkNotNull(block.getRegistryName(), "Block %s has null registry name", block);
 				registry.register(item.setRegistryName(registryName));
+				
+				if (block instanceof IBlockTileEntity)
+				{
+					((IBlockTileEntity)block).registerTileEntity();
+				}
+				
 				ITEM_BLOCKS.add(item);
 			}
 		}

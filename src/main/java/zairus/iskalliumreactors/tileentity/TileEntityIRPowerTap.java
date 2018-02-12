@@ -59,7 +59,7 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 			
 			if (te != null && !(te instanceof TileEntityIRController))
 			{
-				if (te.hasCapability(ENERGY_HANDLER, facing.getOpposite()))
+				if (te.hasCapability(ENERGY_HANDLER, facing.getOpposite()) && te.getCapability(ENERGY_HANDLER, facing.getOpposite()) instanceof IEnergyStorage)
 				{
 					IEnergyStorage store = te.getCapability(ENERGY_HANDLER, facing.getOpposite());
 					int Energy = this.extractEnergy(reactorYield, false);

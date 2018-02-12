@@ -6,10 +6,11 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import zairus.iskalliumreactors.IskalliumReactors;
 import zairus.iskalliumreactors.tileentity.TileEntityIRPowerTap;
 
-public class BlockIRPowerTap extends Block implements ITileEntityProvider
+public class BlockIRPowerTap extends Block implements ITileEntityProvider, IBlockTileEntity
 {
 	public BlockIRPowerTap()
 	{
@@ -24,5 +25,11 @@ public class BlockIRPowerTap extends Block implements ITileEntityProvider
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileEntityIRPowerTap();
+	}
+	
+	@Override
+	public void registerTileEntity()
+	{
+		GameRegistry.registerTileEntity(TileEntityIRPowerTap.class, "tileEntityIRPowerTap");
 	}
 }
