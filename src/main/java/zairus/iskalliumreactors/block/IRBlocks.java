@@ -1,6 +1,8 @@
 package zairus.iskalliumreactors.block;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Preconditions;
@@ -41,14 +43,16 @@ public class IRBlocks
 	@ObjectHolder(IRBlock.STEEL_POWERTAP_ID)
 	public static final Block STEEL_POWERTAP;
 	
+	private static final List<Block> BLOCKS = new ArrayList<Block>();
+	
 	static
 	{
-		ISKALLIUM = new BlockIskallium().setRegistryName(IRBlock.ISKALLIUM_ID).setUnlocalizedName(IRBlock.ISKALLIUM_ID);
-		ISKALLIUM_ORE = new BlockIskalliumStoneOre().setRegistryName(IRBlock.ISKALLIUM_ORE_ID).setUnlocalizedName(IRBlock.ISKALLIUM_ORE_ID);
-		ISKALLIUM_GLASS = new BlockIskalliumGlass().setRegistryName(IRBlock.ISKALLIUM_GLASS_ID).setUnlocalizedName(IRBlock.ISKALLIUM_GLASS_ID);
-		STEEL_CASING = new BlockSteelCasing().setRegistryName(IRBlock.STEEL_CASING_ID).setUnlocalizedName(IRBlock.STEEL_CASING_ID);
-		STEEL_CONTROLLER = new BlockIRController().setRegistryName(IRBlock.STEEL_CONTROLLER_ID).setUnlocalizedName(IRBlock.STEEL_CONTROLLER_ID);
-		STEEL_POWERTAP = new BlockIRPowerTap().setRegistryName(IRBlock.STEEL_POWERTAP_ID).setUnlocalizedName(IRBlock.STEEL_POWERTAP_ID);
+		ISKALLIUM = initBlock(new BlockIskallium(), IRBlock.ISKALLIUM_ID);
+		ISKALLIUM_ORE = initBlock(new BlockIskalliumStoneOre(), IRBlock.ISKALLIUM_ORE_ID);
+		ISKALLIUM_GLASS = initBlock(new BlockIskalliumGlass(), IRBlock.ISKALLIUM_GLASS_ID);
+		STEEL_CASING = initBlock(new BlockSteelCasing(), IRBlock.STEEL_CASING_ID);
+		STEEL_CONTROLLER = initBlock(new BlockIRController(), IRBlock.STEEL_CONTROLLER_ID);
+		STEEL_POWERTAP = initBlock(new BlockIRPowerTap(), IRBlock.STEEL_POWERTAP_ID);
 	}
 	
 	public static void initialize()
@@ -56,21 +60,20 @@ public class IRBlocks
 		;
 	}
 	
+	private static Block initBlock(Block block, String id)
+	{
+		block.setRegistryName(new ResourceLocation(IRConstants.MOD_ID, id));
+		block.setUnlocalizedName(id);
+		BLOCKS.add(block);
+		return block;
+	}
+	
 	@SideOnly(Side.CLIENT)
 	public static void registerModels()
 	{
-		final Item[] blocks = {
-				Item.getItemFromBlock(ISKALLIUM)
-				,Item.getItemFromBlock(ISKALLIUM_ORE)
-				,Item.getItemFromBlock(ISKALLIUM_GLASS)
-				,Item.getItemFromBlock(STEEL_CASING)
-				,Item.getItemFromBlock(STEEL_CONTROLLER)
-				,Item.getItemFromBlock(STEEL_POWERTAP)
-		};
-		
-		for (final Item block : blocks)
+		for (final Block block : BLOCKS)
 		{
-			ModelLoader.setCustomModelResourceLocation(block, 0, new ModelResourceLocation(IRConstants.MOD_ID + ":" + block.getUnlocalizedName().substring(5), "inventory"));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(IRConstants.MOD_ID + ":" + block.getUnlocalizedName().substring(5), "inventory"));
 		}
 	}
 	
@@ -90,16 +93,7 @@ public class IRBlocks
 		{
 			final IForgeRegistry<Block> registry = event.getRegistry();
 			
-			final Block[] blocks = {
-					ISKALLIUM
-					, ISKALLIUM_ORE
-					, ISKALLIUM_GLASS
-					, STEEL_CASING
-					, STEEL_CONTROLLER
-					, STEEL_POWERTAP
-			};
-			
-			registry.registerAll(blocks);
+			registry.registerAll(BLOCKS.toArray(new Block[] { }));
 		}
 		
 		@SubscribeEvent
@@ -107,19 +101,10 @@ public class IRBlocks
 		{
 			final IForgeRegistry<Item> registry = event.getRegistry();
 			
-			final ItemBlock[] items = {
-					new ItemBlock(ISKALLIUM)
-					,new ItemBlock(ISKALLIUM_ORE)
-					,new ItemBlock(ISKALLIUM_GLASS)
-					,new ItemBlock(STEEL_CASING)
-					,new ItemBlock(STEEL_CONTROLLER)
-					,new ItemBlock(STEEL_POWERTAP)
-			};
-			
-			for (final ItemBlock item : items)
+			for (final Block block : BLOCKS)
 			{
-				final Block block = item.getBlock();
 				final ResourceLocation registryName = Preconditions.checkNotNull(block.getRegistryName(), "Block %s has null registry name", block);
+				ItemBlock item = new ItemBlock(block);
 				registry.register(item.setRegistryName(registryName));
 				
 				if (block instanceof IBlockTileEntity)
@@ -138,7 +123,7 @@ public class IRBlocks
 		BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
 		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
 		
-		registerColors(blockColors, itemColors, Colorizers.BLOCK_LEAVES, new Block[] { /**/ });
+		registerColors(blockColors, itemColors, Colorizers.BLOCK_LEAVES, new Block[] { });
 	}
 	
 	private static void registerColors(BlockColors blockColors, ItemColors itemColors, IBlockColor color, Block... blocks)

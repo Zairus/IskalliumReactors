@@ -15,6 +15,7 @@ public class ItemBase extends Item
 		this.setCreativeTab(IskalliumReactors.creativeTab);
 	}
 	
+	/*
 	protected ItemBase setItemName(String name)
 	{
 		this.itemName = name;
@@ -29,4 +30,5 @@ public class ItemBase extends Item
 	{
 		return this.itemName;
 	}
+	*/
 }

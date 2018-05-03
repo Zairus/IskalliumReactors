@@ -10,6 +10,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import zairus.iskalliumreactors.IRConfig;
+import zairus.iskalliumreactors.IskalliumReactors;
 
 public class WorldGenIRMineable extends WorldGenerator
 {
@@ -30,6 +32,9 @@ public class WorldGenIRMineable extends WorldGenerator
 		
 		if (state.getBlock().isReplaceableOreGen(state, world, pos, this.predicate))
 		{
+			if (IRConfig.logIskalliumOreGeneration)
+				IskalliumReactors.logInfo("Iskallium Ore at: " + pos);
+			
 			generated = world.setBlockState(pos, this.oreBlock, 2);
 		}
 		

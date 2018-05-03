@@ -1,10 +1,10 @@
-package zairus.iskalliumreactors.proxy;
+package zairus.iskalliumreactors;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-public class CommonProxy
+public class IRProxy
 {
 	public void preInit(FMLPreInitializationEvent e)
 	{

@@ -1,4 +1,4 @@
-package zairus.iskalliumreactors.proxy;
+package zairus.iskalliumreactors.client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -16,11 +16,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import zairus.iskalliumreactors.IRConstants;
+import zairus.iskalliumreactors.IRProxy;
 import zairus.iskalliumreactors.block.IRBlocks;
 import zairus.iskalliumreactors.item.IRItems;
 
 @Mod.EventBusSubscriber(modid = IRConstants.MOD_ID)
-public class ClientProxy extends CommonProxy
+public class IRProxyClient extends IRProxy
 {
 	@Override
 	public void preInit(FMLPreInitializationEvent e)

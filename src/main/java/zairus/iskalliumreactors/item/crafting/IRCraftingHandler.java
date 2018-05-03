@@ -1,4 +1,4 @@
-package zairus.iskalliumreactors.handlres;
+package zairus.iskalliumreactors.item.crafting;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import zairus.iskalliumreactors.IRConstants;
 import zairus.iskalliumreactors.block.IRBlocks;
 import zairus.iskalliumreactors.item.IRItems;
@@ -58,6 +59,9 @@ public class IRCraftingHandler
 				});
 		
 		Ingredient ingredient_steel_ingot = Ingredient.fromItem(IRItems.STEEL_INGOT);
+		if (OreDictionary.getOres("ingotSteel").size() > 0)
+			ingredient_steel_ingot = Ingredient.fromStacks(OreDictionary.getOres("ingotSteel").get(0));
+		
 		Ingredient ingredient_iskallium_essence = Ingredient.fromItem(IRItems.ISKALLIUM_ESSENCE);
 		Ingredient ingredient_iskallium = Ingredient.fromItem(Item.getItemFromBlock(IRBlocks.ISKALLIUM));
 		Ingredient ingredient_steel_casing = Ingredient.fromItem(Item.getItemFromBlock(IRBlocks.STEEL_CASING));

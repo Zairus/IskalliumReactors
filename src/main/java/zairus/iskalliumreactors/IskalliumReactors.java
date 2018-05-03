@@ -11,8 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import zairus.iskalliumreactors.block.IRBlocks;
-import zairus.iskalliumreactors.handlres.IRCraftingHandler;
-import zairus.iskalliumreactors.proxy.CommonProxy;
+import zairus.iskalliumreactors.item.crafting.IRCraftingHandler;
 import zairus.iskalliumreactors.world.gen.feature.WorldGenIskalliumOre;
 
 @Mod(modid = IRConstants.MOD_ID, name = IRConstants.MOD_NAME, version = IRConstants.MOD_VERSION)
@@ -22,9 +21,9 @@ public class IskalliumReactors
 	public static IskalliumReactors instance;
 	
 	@SidedProxy(clientSide = IRConstants.CLIENT_PROXY, serverSide = IRConstants.COMMON_PROXY)
-	public static CommonProxy proxy;
+	public static IRProxy proxy;
 	
-	public static Logger logger;
+	private static Logger logger;
 	
 	public static CreativeTabs creativeTab = new CreativeTabs("iskalliumReactors") {
 		@Override
@@ -58,5 +57,10 @@ public class IskalliumReactors
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		IskalliumReactors.proxy.postInit(event);
+	}
+	
+	public static void logInfo(String message)
+	{
+		IskalliumReactors.logger.info(message);
 	}
 }
