@@ -9,7 +9,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.IEnergyStorage;
-import zairus.iskalliumreactors.IRConfig;
 import zairus.iskalliumreactors.block.IRBlocks;
 
 public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEnergyStorage
@@ -39,7 +38,7 @@ public class TileEntityIRPowerTap extends TileEntity implements ITickable, IEner
 		if (this.world.isRemote)
 			return;
 		
-		int reactorYield = (controller != null && controller.getIsReactor())? controller.getGeneratorBlockCount() * IRConfig.eachIskalliumBlockPowerValue : 0;
+		int reactorYield = (controller != null)? controller.getReactorYield() : 0;
 		
 		if (this.energy < this.capacity)
 			this.energy += reactorYield;

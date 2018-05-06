@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import zairus.iskalliumreactors.IRConfig;
 import zairus.iskalliumreactors.block.IRBlocks;
 
 public class TileEntityIRController extends TileEntity implements ITickable
@@ -46,6 +47,14 @@ public class TileEntityIRController extends TileEntity implements ITickable
 	public int getGeneratorBlockCount()
 	{
 		return (this.reactorBuilt)? this.generatorBlockCount : 0;
+	}
+
+	public int getReactorYield()
+	{
+		if (!getIsReactor())
+			return 0;
+
+		return getGeneratorBlockCount() * IRConfig.eachIskalliumBlockPowerValue;
 	}
 	
 	public boolean getIsReactor()
