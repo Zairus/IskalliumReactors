@@ -1,0 +1,46 @@
+{
+	"type": "forge:ore_shapeless",
+	"group": "iskalliumreactors:steel_casing",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSteel"
+		}
+	],
+	"result": {
+		"item": "iskalliumreactors:steel_casing",
+		"data": 0
+	}
+}

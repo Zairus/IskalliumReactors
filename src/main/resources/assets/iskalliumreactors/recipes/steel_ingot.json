@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "iskalliumreactors:steel_ingot",
+	"pattern": [
+		"iii",
+		"ici",
+		"iii"
+	],
+	"key": {
+		"i": {
+			"item": "minecraft:iron_ingot",
+			"data": 0
+		},
+		"c": {
+			"item": "minecraft:coal_block",
+			"data": 0
+		}
+	},
+	"result": {
+		"item": "iskalliumreactors:steel_ingot",
+		"data": 0,
+		"count": 9
+	}
+}

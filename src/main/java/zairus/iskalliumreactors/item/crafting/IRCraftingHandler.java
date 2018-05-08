@@ -14,6 +14,7 @@ import zairus.iskalliumreactors.item.IRItems;
 
 public class IRCraftingHandler
 {
+	@Deprecated
 	public static void addRecipes()
 	{
 		GameRegistry.addShapedRecipe(

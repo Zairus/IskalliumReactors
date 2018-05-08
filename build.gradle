@@ -16,7 +16,7 @@ repositories {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "0.5.16"
+version = "0.5.17"
 group = "zairus.iskalliumreactors"
 archivesBaseName = "iskalliumreactors-1.12.2"
 

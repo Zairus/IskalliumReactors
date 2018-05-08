@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "iskalliumreactors:steel_controller",
+	"ingredients": [
+		{ "item": "iskalliumreactors:steel_casing", "data": 0 },
+		{ "item": "iskalliumreactors:iskallium_essence", "data": 0 }
+	],
+	"result": {
+		"item": "iskalliumreactors:steel_controller",
+		"data": 0
+	}
+}

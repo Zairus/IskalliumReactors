@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "iskalliumreactors:iskallium_glass",
+	"pattern": [
+		"ggg",
+		"gig",
+		"ggg"
+	],
+	"key": {
+		"g": {
+			"item": "minecraft:stained_glass",
+			"data": 0
+		},
+		"i": {
+			"item": "iskalliumreactors:iskallium_essence",
+			"data": 0
+		}
+	},
+	"result": {
+		"item": "iskalliumreactors:iskallium_glass",
+		"data": 0,
+		"count": 9
+	}
+}

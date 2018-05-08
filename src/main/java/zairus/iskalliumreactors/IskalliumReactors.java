@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import zairus.iskalliumreactors.block.IRBlocks;
-import zairus.iskalliumreactors.item.crafting.IRCraftingHandler;
 import zairus.iskalliumreactors.world.gen.feature.WorldGenIskalliumOre;
 
 @Mod(modid = IRConstants.MOD_ID, name = IRConstants.MOD_NAME, version = IRConstants.MOD_VERSION)
@@ -49,8 +48,6 @@ public class IskalliumReactors
 		IskalliumReactors.proxy.initBuiltinShapes();
 		
 		GameRegistry.registerWorldGenerator(new WorldGenIskalliumOre(), IRConfig.iskalliumGenerationWeight);
-		
-		IRCraftingHandler.addRecipes();
     }
 	
 	@Mod.EventHandler
